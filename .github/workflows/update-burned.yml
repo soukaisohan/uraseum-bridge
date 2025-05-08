@@ -1,0 +1,25 @@
+name: Update burned.json
+
+on:
+  push:
+    paths:
+      - sync/burned.json
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Copy updated burned.json to root
+        run: |
+          cp sync/burned.json burned.json
+
+      - name: Commit and push updated burned.json
+        run: |
+          git config --global user.name "uraseum-bot"
+          git config --global user.email "bot@uraseum.org"
+          git add burned.json
+          git commit -m "Update burned.json via action"
+          git push
