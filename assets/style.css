@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+}
+code {
+  word-break: break-all;
+  color: lightgreen;
+}
