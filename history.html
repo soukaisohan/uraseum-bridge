@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>URM Burn History</title>
+  <style>
+    body {
+      background-color: #000;
+      background-image: url('logo.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 700px;
+      background-attachment: fixed;
+      color: #fff;
+      font-family: monospace;
+      padding: 30px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 8px 12px; border-bottom: 1px solid #444; text-align: left; }
+    th { color: #0af; }
+  </style>
+</head>
+<body>
+  <h1>URM ERC-20 Burn History</h1>
+  <p>Updated every 10 seconds. Native URM will arrive within 24 hours.</p>
+  <table>
+    <thead>
+      <tr><th>Wallet</th><th>Amount</th><th>Timestamp</th></tr>
+    </thead>
+    <tbody id="burnTable"></tbody>
+  </table>
+  <script>
+    async function loadBurns() {
+      const res = await fetch("burned.json");
+      const data = await res.json();
+      const tbody = document.getElementById("burnTable");
+      tbody.innerHTML = "";
+      data.reverse().forEach(burn => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${burn.wallet}</td><td>${Number(burn.amount).toLocaleString()} URM</td><td>${new Date(burn.timestamp).toLocaleString()}</td>`;
+        tbody.appendChild(row);
+      });
+    }
+    loadBurns();
+    setInterval(loadBurns, 10000);
+  </script>
+  <p style="margin-top: 40px; text-align: center;">
+    <a href="index.html" style="
+      display: inline-block;
+      background: #0af;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1rem;
+    ">← Back to Home</a>
+  </p>
+</body>
+</html>
