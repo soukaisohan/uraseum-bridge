@@ -72,6 +72,12 @@
       margin: 10px 0;
       font-weight: bold;
     }
+
+    #walletAddress {
+      margin-top: 10px;
+      font-size: 0.95em;
+      color: #7df9ff;
+    }
   </style>
 </head>
 <body>
@@ -83,7 +89,8 @@
     <input type="number" id="amount" placeholder="Amount to convert" />
     <br />
     <button class="btn-secondary" onclick="connectWallet()">Connect Wallet</button>
-    <button class="btn-primary" onclick="approveAndConvert()">Approve & Convert</button>
+    <button id="convertBtn" class="btn-primary" onclick="approveAndConvert()" disabled>Approve & Convert</button>
+    <div id="walletAddress"></div>
   </div>
 
   <div class="section">
@@ -108,12 +115,23 @@
   <a class="link" href="buy.html"><button class="btn-primary">Buy URM (Uraseum)</button></a>
 
   <script>
-    function connectWallet() {
-      alert("Wallet connection placeholder.");
+    async function connectWallet() {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          const wallet = accounts[0];
+          document.getElementById("walletAddress").textContent = "Connected: " + wallet;
+          document.getElementById("convertBtn").disabled = false;
+        } catch (err) {
+          alert("Connection refused.");
+        }
+      } else {
+        alert("MetaMask not detected.");
+      }
     }
 
     function approveAndConvert() {
-      alert("Approve & convert placeholder.");
+      alert("Approve & Convert logic to be implemented.");
     }
   </script>
 </body>
