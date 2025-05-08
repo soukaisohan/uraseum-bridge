@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>URASEUM POW</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <style>
     body {
       background-color: #000;
@@ -115,12 +116,20 @@
   <a class="link" href="buy.html"><button class="btn-primary">Buy URM (Uraseum)</button></a>
 
   <script>
+    let signer, provider;
+    const ERC20_ADDRESS = "0x262B7d4B48842EbcAc380B00D0025D7925106D39";
+    const BRIDGE_ADDRESS = "0x439D925CdDa5285d620635d5d12A852553D9c9b4";
+    const ERC20_ABI = ["function approve(address spender, uint256 amount) public returns (bool)"];
+    const BRIDGE_ABI = ["function sendURM(uint256 amount) external"];
+
     async function connectWallet() {
-      if (typeof window.ethereum !== 'undefined') {
+      if (typeof window.ethereum !== "undefined") {
         try {
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          const wallet = accounts[0];
-          document.getElementById("walletAddress").textContent = "Connected: " + wallet;
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+          await provider.send("eth_requestAccounts", []);
+          signer = provider.getSigner();
+          const address = await signer.getAddress();
+          document.getElementById("walletAddress").textContent = "Connected: " + address;
           document.getElementById("convertBtn").disabled = false;
         } catch (err) {
           alert("Connection refused.");
@@ -130,8 +139,25 @@
       }
     }
 
-    function approveAndConvert() {
-      alert("Approve & Convert logic to be implemented.");
+    async function approveAndConvert() {
+      const amountInput = document.getElementById("amount").value;
+      if (!amountInput || isNaN(amountInput)) return alert("Enter a valid amount");
+
+      const value = ethers.utils.parseUnits(amountInput, 18);
+      try {
+        const token = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
+        const tx1 = await token.approve(BRIDGE_ADDRESS, value);
+        await tx1.wait();
+
+        const bridge = new ethers.Contract(BRIDGE_ADDRESS, BRIDGE_ABI, signer);
+        const tx2 = await bridge.sendURM(value);
+        await tx2.wait();
+
+        alert("Conversion successful!");
+      } catch (e) {
+        console.error(e);
+        alert("Transaction failed.");
+      }
     }
   </script>
 </body>
