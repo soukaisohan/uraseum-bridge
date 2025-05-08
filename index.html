@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>URASEUM POW</title>
   <style>
     body {
@@ -9,30 +9,111 @@
       color: #fff;
       font-family: sans-serif;
       text-align: center;
-      padding: 60px 20px;
       background-image: url('logo.png');
-      background-size: 700px;
       background-repeat: no-repeat;
       background-position: center;
+      background-size: 700px;
       background-attachment: fixed;
+      padding: 60px 20px;
     }
-    a.button {
-      display: inline-block;
-      background: #00cfff;
-      color: #000;
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .notice {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    .section {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 1em;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
       font-weight: bold;
-      padding: 12px 24px;
-      border-radius: 8px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #00cfff;
+      color: #000;
+    }
+
+    .btn-secondary {
+      background-color: #444;
+      color: #fff;
+    }
+
+    a.link {
+      color: #0af;
       text-decoration: none;
-      font-size: 1rem;
-      margin-top: 30px;
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <h1>URASEUM POW</h1>
-  <p style="margin-top: 20px;">Transferts traités sous 24 heures.</p>
-  <a href="history.html">→ View URM ERC-20 Burn History</a><br>
-  <a href="buy.html" class="button">Buy URM (Uraseum)</a>
+  <p class="notice">Transferts traités sous 24 heures.</p>
+
+  <div class="section">
+    <input type="number" id="amount" placeholder="Amount to convert" />
+    <br />
+    <button class="btn-secondary" onclick="connectWallet()">Connect Wallet</button>
+    <button class="btn-primary" onclick="approveAndConvert()">Approve & Convert</button>
+  </div>
+
+  <div class="section">
+    <p><strong>Limit:</strong> 50,000 URM ERC-20 per transaction</p>
+    <p><strong>Ratio:</strong> 2 URM ERC-20 = 1 native URM</p>
+    <p><strong>URM ERC-20 contract:</strong><br />
+      <a href="https://etherscan.io/address/0x262B7d4B48842EbcAc380B00D0025D7925106D39" target="_blank" style="color:#0af;">
+        0x262B7d4B48842EbcAc380B00D0025D7925106D39
+      </a>
+    </p>
+    <p><strong>Important:</strong> You must provide a valid Uraseum address to receive your native URM.</p>
+    <p>
+      To receive your native URM, add Uraseum as a custom network in MetaMask:<br />
+      <strong>Name:</strong> Uraseum<br />
+      <strong>RPC:</strong> http://localhost:8545<br />
+      <strong>Chain ID:</strong> 42666<br />
+      <strong>Symbol:</strong> URM
+    </p>
+  </div>
+
+  <a class="link" href="history.html">→ View URM ERC-20 Burn History</a>
+  <a class="link" href="buy.html"><button class="btn-primary">Buy URM (Uraseum)</button></a>
+
+  <script>
+    function connectWallet() {
+      alert("Wallet connection placeholder.");
+    }
+
+    function approveAndConvert() {
+      alert("Approve & convert placeholder.");
+    }
+  </script>
 </body>
 </html>

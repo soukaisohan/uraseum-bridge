@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "wallet": "0x5aA15F87e1cA7E17Bd270Bd2534586E167cFE91f",
+    "amount": 43000,
+    "timestamp": "2025-05-06T18:42:12Z"
+  },
+  {
+    "wallet": "0xB2f8A36E6CEB84c13a18c370eDcF2aC4212B7Cc3",
+    "amount": 38400,
+    "timestamp": "2025-05-06T18:38:49Z"
+  },
+  {
+    "wallet": "0xDf7e6cA9FeFCfC2C3E82F9D9bFeBEBE81A3bAe1B",
+    "amount": 49500,
+    "timestamp": "2025-05-06T18:35:01Z"
+  }
+]
