@@ -1,10 +1,6 @@
 name: Update burned.json
 
-on:
-  push:
-    paths:
-      - sync/burned.json
-
+on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
