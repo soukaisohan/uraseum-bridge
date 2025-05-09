@@ -21,5 +21,8 @@ jobs:
           git config --global user.name "uraseum-bot"
           git config --global user.email "bot@uraseum.org"
           git add burned.json
+          git commit -m "Update burned.json via GitHub Action"
+          git push
+
           git commit -m "Update burned.json via action"
           git push
