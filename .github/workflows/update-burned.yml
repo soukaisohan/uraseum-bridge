@@ -23,6 +23,3 @@ jobs:
           git add burned.json
           git commit -m "Update burned.json via GitHub Action"
           git push
-
-          git commit -m "Update burned.json via action"
-          git push
